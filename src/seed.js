@@ -1,9 +1,8 @@
-window.Seed = (function () {
-  function generateScore() {
+  const generateScore = () => {
     return Math.floor((Math.random() * 50) + 15);
   }
 
-  const players = [
+  export const players = [
     {
       id: 1,
       name: 'Leonardo',
@@ -30,5 +29,5 @@ window.Seed = (function () {
     },
   ];
 
-  return { players: players };
-}());
+ export default players;
+

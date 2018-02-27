@@ -1,43 +1,9 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import FontIcon from 'material-ui/FontIcon';
-import KeyboardArrowUp from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
-import KeyboardArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
-import {fullWhite} from 'material-ui/styles/colors';
-
-function generateScore() {
-  return Math.floor((Math.random() * 50) + 15);
-}
-
-const players = [
-  {
-    id: 1,
-    name: 'Leonardo',
-    playerNumber: 1,
-    points: generateScore(),
-  },
-  {
-    id: 2,
-    name: 'Donatello',
-    playerNumber: 2,
-    points: generateScore(),
-  },
-  {
-    id: 3,
-    name: 'Raphael',
-    playerNumber: 3,
-    points: generateScore(),
-  },
-  {
-    id: 4,
-    name: 'Michelangelo',
-    playerNumber: 4,
-    points: generateScore(),
-  },
-];
-
+import { players } from './seed';
+import Avatars from './components/avatar';
+import Buttons from './components/Buttons';
 
 const styles = {
   root: {
@@ -47,10 +13,6 @@ const styles = {
   gridList: {
     width: 800
   },
-};
-
-const style = {
-  margin: 12,
 };
 
 class Scoreboard extends React.Component {
@@ -121,8 +83,10 @@ class Scoreboard extends React.Component {
           margin: '0 auto'
         }}>
           <h1>Scoreboard</h1>
-          {playerComponents}
-        </div>
+          
+            {playerComponents}
+          </div>
+
       </MuiThemeProvider>
     );
   }
@@ -145,23 +109,18 @@ class Player extends React.Component {
 
   render() {
     return (
+      
       <Card>
+        <div style={{
+        display:'flex',
+        flexDirection: 'row'
+      }}>
         <CardTitle title={this.props.name} subtitle={this.props.playerNumber} />
         <CardText>Score: {this.props.points}</CardText>
-        <FlatButton
-          backgroundColor="#a4c639"
-          hoverColor="#8AA62F"
-          icon={<KeyboardArrowUp color={fullWhite} />}
-          style={style}
-          onClick={this.handleOnScore}
-        />
-        <FlatButton
-          backgroundColor="#a4c639"
-          hoverColor="#8AA62F"
-          icon={<KeyboardArrowDown color={fullWhite} />}
-          style={style}
-          onClick={this.handleLosePoint}
-        />
+        <Avatars></Avatars>
+        <Buttons></Buttons>
+        
+      </div>
       </Card>
     );
   }
