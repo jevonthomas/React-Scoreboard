@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardTitle, CardText} from 'material-ui/Card';
 import { players } from './seed';
 import Avatars from './components/avatar';
-import Buttons from './components/Buttons';
+import FlatButton from 'material-ui/FlatButton';
+import KeyboardArrowUp from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
+import KeyboardArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
+import { fullWhite } from 'material-ui/styles/colors';
 
-const styles = {
-  root: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  gridList: {
-    width: 800
-  },
+const buttonStyle = {
+  heigth: '100%'
 };
 
-class Scoreboard extends React.Component {
+class Scoreboard extends Component {
   constructor(props) {
     super(props);
 
@@ -79,11 +76,10 @@ class Scoreboard extends React.Component {
     return (
       <MuiThemeProvider>
         <div style={{
-          width: '50%',
+          width: '30%',
           margin: '0 auto'
         }}>
           <h1>Scoreboard</h1>
-          
             {playerComponents}
           </div>
 
@@ -92,7 +88,7 @@ class Scoreboard extends React.Component {
   }
 }
 
-class Player extends React.Component {
+class Player extends Component {
   constructor(props) {
     super(props);
 
@@ -113,12 +109,45 @@ class Player extends React.Component {
       <Card>
         <div style={{
         display:'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'space-between'
       }}>
-        <CardTitle title={this.props.name} subtitle={this.props.playerNumber} />
-        <CardText>Score: {this.props.points}</CardText>
-        <Avatars></Avatars>
-        <Buttons></Buttons>
+        <CardTitle style={{
+          order: 2,
+          marginRight: 'auto'
+          }} title={this.props.name} subtitle={this.props.playerNumber} />
+        <Avatars style={{
+          order: 1
+        }}></Avatars>
+        <div style={{
+          order: 3,
+          display: 'flex',
+          flexDirection: 'row-reverse'
+          }}>
+          <CardText style={{
+            fontSize: '100%',
+            alignSelf: 'center'
+          }}>{this.props.points}</CardText>
+          <div style={{
+            display:'flex',
+            flexDirection: 'column'
+          }}>
+            <FlatButton
+              backgroundColor="#a4c639"
+              hoverColor="#8AA62F"
+              icon={<KeyboardArrowUp color={fullWhite} />}
+              style={{height: '100%'}}
+              onClick={this.handleOnScore}
+            />
+            <FlatButton
+              backgroundColor="#a4c639"
+              hoverColor="#8AA62F"
+              icon={<KeyboardArrowDown color={fullWhite} />}
+              style={{height: '100%'}}
+              onClick={this.handleLosePoint}
+            />
+          </div>  
+        </div>
         
       </div>
       </Card>
